@@ -41,4 +41,13 @@ else
 fi
 
 # start the proxy
-gost $GOST_ARGS
+gost $GOST_ARGS &
+
+# start the API service
+python3 /api/app.py &
+
+# Wait for any process to exit
+wait -n
+
+# Exit with status of process that exited first
+exit $?
